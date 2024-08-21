@@ -1,4 +1,4 @@
-import UserForBudget from "../models/userModelForBudget";
+import UserForBudget from "../models/userModelForBudget.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import express from "express";
@@ -8,23 +8,28 @@ const router = express.Router();
 
 
 router.post("/register", async (req, res) => {
-    const { username, password } = req.body;
-  
-    try {
-      const existingUser = await UserForBudget.findOne({ username });
-  
-      if (existingUser) {
-        return res.status(409).send("Username already taken");
-      }
-  
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new UserForBudget({ username, password: hashedPassword });
-      await newUser.save();
-      res.status(201).send("User registered");
-    } catch (error) {
-      res.status(500).send("Error registering user");
+  const { username, password } = req.body;
+
+  try {
+    const existingUser = await UserForBudget.findOne({ username });
+
+    if (existingUser) {
+      return res.status(409).send("Username already taken");
     }
-  });
+
+    // Find the highest userID and increment it
+    const highestUser = await UserForBudget.findOne({}, {}, { sort: { userID: -1 } });
+    const newUserID = highestUser ? highestUser.userID + 1 : 1; // Start from 1 if no users exist
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new UserForBudget({ username, password: hashedPassword, userID: newUserID });
+    await newUser.save();
+    res.status(201).send("User registered");
+  } catch (error) {
+    res.status(500).send("Error registering user");
+  }
+});
+
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;

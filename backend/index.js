@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes.js"
+import expressRoutes from "./routes/expenseRoutes.js"
 config();
 const app = express();
 app.use(express.json());
@@ -28,3 +29,4 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/users", userRoutes);
+app.use("/api/expense", expressRoutes);
