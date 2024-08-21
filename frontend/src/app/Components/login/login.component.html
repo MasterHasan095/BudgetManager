@@ -1,15 +1,15 @@
 <div class="login-container">
     <h2>Login to Your Account</h2>
     <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
-      <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" name="email" ngModel required>
-      </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" name="username" ngModel required>
+        </mat-form-field>
   
-      <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" name="password" ngModel required>
-      </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" ngModel required>
+        </mat-form-field>
   
       <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
     </form>
