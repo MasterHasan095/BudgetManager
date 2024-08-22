@@ -15,18 +15,18 @@ import { ReportsComponent } from './Components/reports/reports.component';
 import {Routes, RouterModule} from '@angular/router';
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './Guard/auth.guard';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './Interceptors/auth.interceptor';
+import { HttpClientModule } from '@angular/common/http';  // Import this module
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'add', component: AddComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard] },
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
@@ -45,6 +45,7 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

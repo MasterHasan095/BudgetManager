@@ -11,18 +11,22 @@ export class RegisterComponent {
   username = '';
   password = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+
+   }
 
   register(): void {
-    const user = { username: this.username, password: this.password };
-    this.authService.register(user).subscribe(
-      () => {
-        alert('Registration successful');
-        this.router.navigate(['/login']);
-      },
-      (error: any) => {
-        alert('Registration failed');
-      }
-    );
+  //   const user = { username: this.username, password: this.password };
+  //   this.authService.register(user).subscribe(
+  //     () => {
+  //       alert('Registration successful');
+  //       this.router.navigate(['/login']);
+  //     },
+  //     (error: any) => {
+  //       alert('Registration failed');
+  //     }
+  //   );
+  // }
+  console.log("hi");
   }
 }
