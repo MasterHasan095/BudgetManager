@@ -5,22 +5,24 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  username = '';
+  password = '';
 
-  onRegister(form: any) {
-    if (form.valid) {
-      this.authService.register(form.value).subscribe(
-        (response) => {
-          console.log('Registration successful', response);
-          this.router.navigate(['/login']); 
-        },
-        (error) => {
-          console.error('Registration failed', error);
-        }
-      );
-    }
+  constructor(private authService: AuthService, private router: Router) { }
+
+  register(): void {
+    const user = { username: this.username, password: this.password };
+    this.authService.register(user).subscribe(
+      () => {
+        alert('Registration successful');
+        this.router.navigate(['/login']);
+      },
+      (error: any) => {
+        alert('Registration failed');
+      }
+    );
   }
 }

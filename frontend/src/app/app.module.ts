@@ -14,12 +14,19 @@ import { EditComponent } from './Components/edit/edit.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import {Routes, RouterModule} from '@angular/router';
 import { AuthService } from './Services/auth.service';
+import { AuthGuard } from './Guard/auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './Interceptors/auth.interceptor';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent }, // Home page
-  // Add routes for other components here
+  { path: 'register', component: RegisterComponent },
+  { path: 'add', component: AddComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
@@ -43,7 +50,9 @@ const routes: Routes = [
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    AuthService
+    AuthService,
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

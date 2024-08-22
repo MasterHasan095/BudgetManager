@@ -1,22 +1,14 @@
 <div class="register-container">
-    <h2>Create an Account</h2>
-    <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
-      <mat-form-field class="full-width">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" name="username" ngModel required>
-      </mat-form-field>
-  
-      <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" name="password" ngModel required >
-      </mat-form-field>
-  
-      <mat-form-field class="full-width">
-        <mat-label>Confirm Password</mat-label>
-        <input matInput type="password" name="confirmPassword" ngModel required>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit" >Register</button>
-    </form>
-  </div>
-  
+  <h2>Register</h2>
+  <form (ngSubmit)="register()">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+</div>

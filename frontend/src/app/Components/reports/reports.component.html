@@ -1,1 +1,27 @@
-<p>reports works!</p>
+<div class="reports-container">
+    <h2>Expense Reports</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Comment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenses">
+          <td>{{ expense.name }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.comment }}</td>
+          <td>
+            <button (click)="deleteExpense(expense.id)">Delete</button>
+            <a [routerLink]="['/edit', expense.id]">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

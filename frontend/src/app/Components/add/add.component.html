@@ -1,1 +1,23 @@
-<p>add works!</p>
+<div class="add-expense-container">
+    <h2>Add Expense</h2>
+    <form (ngSubmit)="addExpense()">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="name" name="name" required>
+      </div>
+      <div>
+        <label for="category">Category:</label>
+        <input type="text" id="category" [(ngModel)]="category" name="category" required>
+      </div>
+      <div>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" [(ngModel)]="amount" name="amount" required>
+      </div>
+      <div>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" [(ngModel)]="comment" name="comment"></textarea>
+      </div>
+      <button type="submit">Add Expense</button>
+    </form>
+  </div>
+  
